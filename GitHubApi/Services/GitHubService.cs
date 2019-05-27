@@ -19,7 +19,7 @@ namespace GitHubApi.Services
         public bool SearchRepositoryError { get; private set; }
         public string SearchRepositoryErrorMessage { get; private set; }
 
-        public GitHubService(HttpClient httpClient, ILogger logger)
+        public GitHubService(HttpClient httpClient, ILogger<GitHubService> logger)
         {
             _httpClient = httpClient;
             _logger = logger;

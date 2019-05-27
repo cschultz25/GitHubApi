@@ -1,6 +1,5 @@
-﻿using GitHubApi.Services;
+using GitHubApi.Services;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -10,11 +9,11 @@ namespace GitHubApi.Controllers
     [ApiController]
     public class GitHubController : ControllerBase
     {
-        private IGitHubService _gitHubClient { get; set; }
+        private IGitHubService _gitHubClient { get; }        
 
         public GitHubController(IGitHubService gitHubService)
         {
-            _gitHubClient = gitHubService;
+            _gitHubClient = gitHubService;            
         }
 
         /// <summary>
@@ -24,19 +23,18 @@ namespace GitHubApi.Controllers
         /// <returns></returns>
         [HttpGet("search")]
         public async Task<ActionResult<IEnumerable<object>>> Get([FromQuery] string lang)
-        {
+        {            
             await _gitHubClient.SearchByLanguage(lang);
 
             if (!_gitHubClient.SearchRepositoryError)
                 return Ok(_gitHubClient.Top(5));
             else
                 return BadRequest("Error retrieve response from GitHub api.");
-        }
+        }       
 
         [HttpGet("ping")]
         public ActionResult<DateTime> Ping()
         {
             return DateTime.UtcNow;
         }
-    }       
 }

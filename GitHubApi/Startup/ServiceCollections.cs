@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Reflection;
 
 namespace GitHubApi.Startup
@@ -11,6 +12,7 @@ namespace GitHubApi.Startup
         public static IServiceCollection ConfigureHttpClients(this IServiceCollection services)
         {
             services.AddHttpClient<IGitHubService, GitHubService>();
+                
 
             return services;
         }
@@ -34,9 +36,11 @@ namespace GitHubApi.Startup
 
         public static IServiceCollection ConfigureLogging(this IServiceCollection services)
         {
-            services.AddLogging(configure =>
-            {
-                configure.AddConsole();
+            services.AddLogging(logger =>
+            {                
+                logger.AddConsole();
+                logger.AddDebug();
+                logger.AddEventSourceLogger();
             });
 
             return services;
