@@ -57,6 +57,7 @@ namespace GitHubApi.Services
             try
             {
                 //returned elements should be in descending order by star count
+                //ToDo: refine query string to use a model object
                 await ProcessResponse(await _httpClient.GetAsync($"{GitHubConstants.SearchRepositories}?q=language:{System.Web.HttpUtility.UrlEncode(language)}&sort=stars&order=desc"));                                
             }catch(Exception ex)
             {
@@ -70,10 +71,9 @@ namespace GitHubApi.Services
         }
 
         private async Task ProcessResponse(HttpResponseMessage response)
-        {
+        {           
             if (response.IsSuccessStatusCode)
-            {
-                _logger.LogDebug(Newtonsoft.Json.JsonConvert.SerializeObject(response.Content));
+            {                
                 var responseObj = await response.Content.ReadAsAsync<RepositoryResponse>();
                 Repositories = responseObj.Items;
             }
