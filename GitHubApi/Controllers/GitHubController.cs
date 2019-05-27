@@ -23,8 +23,8 @@ namespace GitHubApi.Controllers
         /// <summary>
         /// Method used to search the GitHub API for the top 5 starred repositories
         /// </summary>
-        /// <param name="lang">programming language</param>
-        /// <returns></returns>
+        /// <param name="lang">URL encoded language value</param>
+        /// <returns></returns>        
         [HttpGet("StarGazers/Top")]
         public async Task<ActionResult<IEnumerable<object>>> GetTopStarGazers([FromQuery] string lang)
         {
