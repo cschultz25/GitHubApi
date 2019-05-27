@@ -56,7 +56,7 @@ namespace GitHubApi.Services
             try
             {
                 //returned elements should be in descending order by star count
-                await ProcessResponse(await _httpClient.GetAsync($"{GitHubConstants.SearchRepositories}?q=language{language}&sort=stars&order=desc"));                                
+                await ProcessResponse(await _httpClient.GetAsync($"{GitHubConstants.SearchRepositories}?q=language:{System.Web.HttpUtility.UrlEncode(language)}&sort=stars&order=desc"));                                
             }catch(Exception ex)
             {
                 SearchRepositoryError = true;
