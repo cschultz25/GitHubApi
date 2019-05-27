@@ -52,6 +52,7 @@ namespace GitHubApi.Services
         public async Task<IEnumerable<Repository>> SearchByLanguage(string language)
         {
             SearchRepositoryError = false;
+            SearchRepositoryErrorMessage = string.Empty;
 
             try
             {
@@ -81,7 +82,7 @@ namespace GitHubApi.Services
                 //ToDo: interpret different api responses to better support integration
                 switch (response.StatusCode)
                 {
-                    case System.Net.HttpStatusCode.UnprocessableEntity:
+                    case HttpStatusCode.UnprocessableEntity:
                         SearchRepositoryErrorMessage = "Inavlid language submitted.  Github is unable to process the request";
                         break;
                     default:
