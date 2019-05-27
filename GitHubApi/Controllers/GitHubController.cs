@@ -24,8 +24,8 @@ namespace GitHubApi.Controllers
         /// Method used to search the GitHub API for the top 5 starred repositories
         /// </summary>
         /// <param name="lang">URL encoded language value</param>
-        /// <returns></returns>        
-        [HttpGet("StarGazers/Top")]
+        /// <returns></returns>                
+        [HttpGet("Repositories/Stargazers/Top")]    //ToDo: would prefer this to be a query string instead of an exact route
         public async Task<ActionResult<IEnumerable<object>>> GetTopStarGazers([FromQuery] string lang)
         {
             try
