@@ -1,3 +1,4 @@
+using GitHubApi.Models;
 using GitHubApi.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -26,11 +27,11 @@ namespace GitHubApi.Controllers
         /// <param name="lang">URL encoded language value</param>
         /// <returns></returns>                
         [HttpGet("Repositories/Stargazers/Top")]    //ToDo: would prefer this to be a more complex query string instead of an exact route
-        public async Task<ActionResult<IEnumerable<object>>> GetTopStarGazers([FromQuery] string lang)
+        public async Task<ActionResult<IEnumerable<object>>> GetTopStarGazers([FromQuery] TopStargazersRequest request)
         {
             try
             {
-                await _gitHubClient.SearchByLanguage(lang);
+                await _gitHubClient.SearchByLanguage(request.Language);
 
                 if (!_gitHubClient.SearchRepositoryError)
                     return Ok(_gitHubClient.TopStarGazers(5));
