@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using GitHubApi.Models;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,20 +12,24 @@ namespace GitHubApi.Services
         /// </summary>
         bool SearchRepositoryError { get; }
         /// <summary>
+        /// Property used to pass any error messaging along
+        /// </summary>
+        string SearchRepositoryErrorMessage { get; }
+        /// <summary>
         /// Property containing the repository list retrieved from the API
         /// </summary>
-        IOrderedEnumerable<object> Repositories { get; }
+        IEnumerable<Repository> Repositories { get; }
         /// <summary>
         /// Method used to query the API by particular language
         /// </summary>
         /// <param name="language"></param>
         /// <returns></returns>
-        Task<IEnumerable<object>> SearchByLanguage(string language);
+        Task<IEnumerable<Repository>> SearchByLanguage(string language);
         /// <summary>
         /// Method used to filter out the result set and return the top 'n' results
         /// </summary>
         /// <param name="cnt"></param>
         /// <returns></returns>
-        IEnumerable<object> Top(int n);
+        IEnumerable<Repository> TopStarGazers(int n);
     }
 }
