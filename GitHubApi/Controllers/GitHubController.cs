@@ -25,7 +25,7 @@ namespace GitHubApi.Controllers
         /// </summary>
         /// <param name="lang">URL encoded language value</param>
         /// <returns></returns>                
-        [HttpGet("Repositories/Stargazers/Top")]    //ToDo: would prefer this to be a query string instead of an exact route
+        [HttpGet("Repositories/Stargazers/Top")]    //ToDo: would prefer this to be a more complex query string instead of an exact route
         public async Task<ActionResult<IEnumerable<object>>> GetTopStarGazers([FromQuery] string lang)
         {
             try
