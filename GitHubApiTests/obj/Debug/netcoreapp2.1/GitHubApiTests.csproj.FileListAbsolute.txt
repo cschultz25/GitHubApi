@@ -1,0 +1,17 @@
+C:\TFS\GitHubApi\GitHubApiTests\bin\Debug\netcoreapp2.1\NUnit3.TestAdapter.dll
+C:\TFS\GitHubApi\GitHubApiTests\bin\Debug\netcoreapp2.1\NUnit3.TestAdapter.pdb
+C:\TFS\GitHubApi\GitHubApiTests\bin\Debug\netcoreapp2.1\nunit.engine.netstandard.dll
+C:\TFS\GitHubApi\GitHubApiTests\bin\Debug\netcoreapp2.1\GitHubApiTests.deps.json
+C:\TFS\GitHubApi\GitHubApiTests\bin\Debug\netcoreapp2.1\GitHubApiTests.runtimeconfig.json
+C:\TFS\GitHubApi\GitHubApiTests\bin\Debug\netcoreapp2.1\GitHubApiTests.runtimeconfig.dev.json
+C:\TFS\GitHubApi\GitHubApiTests\bin\Debug\netcoreapp2.1\GitHubApiTests.dll
+C:\TFS\GitHubApi\GitHubApiTests\bin\Debug\netcoreapp2.1\GitHubApi.dll
+C:\TFS\GitHubApi\GitHubApiTests\bin\Debug\netcoreapp2.1\GitHubApi.pdb
+C:\TFS\GitHubApi\GitHubApiTests\obj\Debug\netcoreapp2.1\GitHubApiTests.csprojAssemblyReference.cache
+C:\TFS\GitHubApi\GitHubApiTests\obj\Debug\netcoreapp2.1\GitHubApiTests.csproj.CoreCompileInputs.cache
+C:\TFS\GitHubApi\GitHubApiTests\obj\Debug\netcoreapp2.1\GitHubApiTests.AssemblyInfoInputs.cache
+C:\TFS\GitHubApi\GitHubApiTests\obj\Debug\netcoreapp2.1\GitHubApiTests.AssemblyInfo.cs
+C:\TFS\GitHubApi\GitHubApiTests\obj\Debug\netcoreapp2.1\GitHubApiTests.csproj.CopyComplete
+C:\TFS\GitHubApi\GitHubApiTests\bin\Debug\netcoreapp2.1\GitHubApiTests.pdb
+C:\TFS\GitHubApi\GitHubApiTests\obj\Debug\netcoreapp2.1\GitHubApiTests.dll
+C:\TFS\GitHubApi\GitHubApiTests\obj\Debug\netcoreapp2.1\GitHubApiTests.pdb
