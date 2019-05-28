@@ -1,5 +1,6 @@
 ﻿using GitHubApi.Configuration;
 using GitHubApi.Models;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -49,24 +50,33 @@ namespace GitHubApi.Services
         /// </summary>
         /// <param name="language">Search parameter for the API</param>
         /// <returns>Repsitory objects</returns>
-        public async Task<IEnumerable<Repository>> SearchByLanguage(string language)
+        public async Task<IEnumerable<Repository>> SearchTopLanguagesByStars(string language)
+        {            
+            var searchQry = BuildQuery(language: language,
+                                       sort: "stars",
+                                       order: "desc");
+
+            return await Search(searchQry);
+        }
+
+        public async Task<IEnumerable<Repository>> Search(Dictionary<string, string> queryParams)
         {
             SearchRepositoryError = false;
             SearchRepositoryErrorMessage = string.Empty;
-
             try
             {
-                //returned elements should be in descending order by star count
-                //ToDo: refine query string to use a model object
-                await ProcessResponse(await _httpClient.GetAsync($"{GitHubConstants.SearchRepositories}?q=language:{System.Web.HttpUtility.UrlEncode(language)}&sort=stars&order=desc"));                                
-            }catch(Exception ex)
+                var searchUri = QueryHelpers.AddQueryString(GitHubConstants.SearchRepositories, queryParams);
+
+                await ProcessResponse(await _httpClient.GetAsync(searchUri));
+            }
+            catch (Exception ex)
             {
                 SearchRepositoryError = true;
                 SearchRepositoryErrorMessage = "Unhandled exception occurred while processing Github search request";
                 Repositories = default;
                 _logger.LogError(ex, SearchRepositoryErrorMessage);
             }
-        
+
             return Repositories;
         }
 
@@ -93,6 +103,22 @@ namespace GitHubApi.Services
                 Repositories = default;
                 _logger.LogError(SearchRepositoryErrorMessage);
             }
+        }
+
+        private Dictionary<string, string> BuildQuery(string language = null, string sort = null, string order = null)
+        {
+            var qry = new Dictionary<string, string>();
+
+            if (language != null)
+                qry.Add("q", $"language:{System.Web.HttpUtility.UrlEncode(language)}");
+
+            if (sort != null)
+                qry.Add("sort", sort);
+
+            if (order != null)
+                qry.Add("order", order);
+
+            return qry;
         }
     }
 }

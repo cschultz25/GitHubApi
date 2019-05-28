@@ -31,7 +31,7 @@ namespace GitHubApi.Controllers
         {
             try
             {
-                await _gitHubClient.SearchByLanguage(request.Language);
+                await _gitHubClient.SearchTopLanguagesByStars(request.Language);
 
                 if (!_gitHubClient.SearchRepositoryError)
                     return Ok(_gitHubClient.TopStarGazers(5));
