@@ -24,7 +24,7 @@ namespace GitHubApi.Services
         /// </summary>
         /// <param name="language"></param>
         /// <returns></returns>
-        Task<IEnumerable<Repository>> SearchTopLanguagesByStars(string language);
+        Task<IEnumerable<Repository>> SearchTopLanguagesByStars(TopStargazersRequest request);
         Task<IEnumerable<Repository>> Search(Dictionary<string, string> queryParams);
         /// <summary>
         /// Method used to filter out the result set and return the top 'n' results

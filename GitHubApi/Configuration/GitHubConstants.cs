@@ -6,5 +6,10 @@
         public static string GitHubDomain = "https://api.github.com";
 
         public static string SearchRepositories = "search/repositories";
+
+        public static class Repository
+        {
+            public static string Stars = "stars";
+        }
     }
 }

@@ -39,9 +39,9 @@ namespace GitHubApi.Services
         {
             var repoCnt = Repositories.Count();
             if (repoCnt < count)
-                return Repositories.OrderByDescending(x=>x.StarGazers_Count).Take(repoCnt);
+                return Repositories.OrderByDescending(x => x.StarGazers_Count).Take(repoCnt);
             else
-                return Repositories.OrderByDescending(x=>x.StarGazers_Count).Take(count);
+                return Repositories.OrderByDescending(x => x.StarGazers_Count).Take(count);
         }
 
         /// <summary>
@@ -50,11 +50,9 @@ namespace GitHubApi.Services
         /// </summary>
         /// <param name="language">Search parameter for the API</param>
         /// <returns>Repsitory objects</returns>
-        public async Task<IEnumerable<Repository>> SearchTopLanguagesByStars(string language)
-        {            
-            var searchQry = BuildQuery(language: language,
-                                       sort: "stars",
-                                       order: "desc");
+        public async Task<IEnumerable<Repository>> SearchTopLanguagesByStars(TopStargazersRequest request)
+        {
+            var searchQry = BuildQuery(request.Language, GitHubConstants.Repository.Stars, request.OrderBy);
 
             return await Search(searchQry);
         }
@@ -67,7 +65,9 @@ namespace GitHubApi.Services
             {
                 var searchUri = QueryHelpers.AddQueryString(GitHubConstants.SearchRepositories, queryParams);
 
-                await ProcessResponse(await _httpClient.GetAsync(searchUri));
+                var result = await _httpClient.GetAsync(searchUri);
+
+                await ProcessResponse(result);
             }
             catch (Exception ex)
             {
@@ -81,9 +81,9 @@ namespace GitHubApi.Services
         }
 
         private async Task ProcessResponse(HttpResponseMessage response)
-        {           
+        {
             if (response.IsSuccessStatusCode)
-            {                
+            {
                 var responseObj = await response.Content.ReadAsAsync<RepositoryResponse>();
                 Repositories = responseObj.Items;
             }
@@ -105,18 +105,18 @@ namespace GitHubApi.Services
             }
         }
 
-        private Dictionary<string, string> BuildQuery(string language = null, string sort = null, string order = null)
+        private Dictionary<string, string> BuildQuery(string lang = null, string sort = null, OrderBy? order = default)
         {
             var qry = new Dictionary<string, string>();
 
-            if (language != null)
-                qry.Add("q", $"language:{System.Web.HttpUtility.UrlEncode(language)}");
+            if (!string.IsNullOrEmpty(lang))
+                qry.Add("q", $"language:{lang}");
 
-            if (sort != null)
+            if (!string.IsNullOrEmpty(sort))
                 qry.Add("sort", sort);
 
-            if (order != null)
-                qry.Add("order", order);
+            if (order.HasValue)
+                qry.Add("order", order.Value.ToString());
 
             return qry;
         }
